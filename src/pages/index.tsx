@@ -24,7 +24,10 @@ export default function SignIn() {
 
   const {errors} = formState;
 
-  const handleSignIn: SubmitHandler<SignInFormData> = (values) => {
+  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
+
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
     console.log(values);
   }
 
@@ -49,7 +52,15 @@ export default function SignIn() {
           <Input name='email' type='email' label='E-mail' error={errors.email} {...register('email')} />
           <Input name='password' type='password' label='Senha' error={errors.password} {...register('password')} />
         </Stack>
-          <Button mt='6' type="submit" colorScheme="pink" size='lg'>Entrar</Button>
+          <Button 
+            mt='6' 
+            type="submit" 
+            colorScheme="pink" 
+            size='lg'
+            isLoading={formState.isSubmitting}
+          > 
+            Entrar
+          </Button>
       </Flex>
     </Flex>
   )
